@@ -1,0 +1,35 @@
+.taskDiv-style {
+  text-transform: capitalize;
+  font-size: 18px;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.1px solid #000428;
+  align-items: center;
+}
+.task-btns {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  width: 90px;
+}
+.bg-red {
+  background-color: #ff3851;
+}
+.bg-yellow {
+  background-color: #66cd00;
+}
+.task-btns:hover {
+  cursor: pointer;
+  background-color: #000428;
+}
+
+.done {
+  background-color: #00ccf3;
+}
+.taskDone {
+  text-decoration: line-through;
+  color: #ff3851;
+}
