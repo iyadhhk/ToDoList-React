@@ -5,53 +5,39 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newTask: { taskName: "", isDone: false },
+      newTask: "",
       tasks: []
     };
   }
 
   handleInput = e => {
-    this.setState({ newTask: { taskName: e.target.value, isDone: false } });
+    this.setState({ newTask: e.target.value });
   };
 
   handleClick = e => {
-    e.preventDefault();
-    if (this.state.newTask.taskName)
-      this.setState(
-        state => {
-          const tasks = [...state.tasks, state.newTask];
-          return {
-            tasks,
-            newTask: { taskName: "", isDone: false }
-          };
-        },
-        () => console.log(this.state.newTask)
-      );
+    if (this.state.newTask)
+      this.setState({
+        tasks: [
+          ...this.state.tasks,
+          { taskName: this.state.newTask, isDone: false }
+        ],
+        newTask: ""
+      });
   };
 
   onRemoveItem = i => {
-    this.setState(state => {
-      const tasks = state.tasks.filter((item, j) => i !== j);
-      return { tasks };
-    });
+    this.setState({ tasks: this.state.tasks.filter((item, j) => i !== j) });
   };
 
   onUpdateItem = i => {
-    this.setState(state => {
-      const tasks = state.tasks.map((item, j) => {
-        if (i === j) return { taskName: item.taskName, isDone: !item.isDone };
-        else return item;
-      });
-
-      return { tasks };
-    });
-  };
-
-  cancelCourse = () => {
     this.setState({
-      taskName: ""
+      tasks: this.state.tasks.map((item, j) => {
+        if (i === j) return { ...item, isDone: !item.isDone };
+        else return item;
+      })
     });
   };
+
   render() {
     return (
       <div>
@@ -62,8 +48,7 @@ class Form extends React.Component {
           type="text"
           placeholder="Enter new Task"
           onChange={this.handleInput}
-          onClick={this.cancelCourse}
-          value={this.state.newTask.taskName}
+          value={this.state.newTask}
         />
         <button className="addTaskBtn btn" onClick={this.handleClick}>
           New Task
